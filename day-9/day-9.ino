@@ -35,7 +35,7 @@ double getBatteryPercentage()
     // custom function calculates battery charge percentage
     // and returns the result as a double precision number
 
-    return (((double)batteryLevel / (double)batteryCapacity) * 100);
+    return (((double)batteryLevel / (double)BATTERY_CAPACITY) * 100);
 }
 
 void ShowBatteryPercentage()
