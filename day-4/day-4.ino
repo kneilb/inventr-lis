@@ -20,6 +20,9 @@ void setup()
 
 void loop()
 {
+    // 3 equivalent ways of doing the same thing.
+    // Which is the best compromise between ease of understanding & repetition / wordiness?!
+
     if (digitalRead(switch1) == HIGH)
     {
         digitalWrite(led1, HIGH);
@@ -29,7 +32,7 @@ void loop()
         digitalWrite(led1, LOW);
     }
 
-    int s2 = digitalRead(switch2);
+    const int s2 = digitalRead(switch2);
     digitalWrite(led2, s2);
 
     digitalWrite(led3, digitalRead(switch3));

@@ -4,16 +4,16 @@
 const byte ROWS = 4;
 const byte COLS = 4;
 
-byte rowPins[ROWS] = {5, 4, 3, 2};
-byte colPins[COLS] = {6, 7, 8, 9};
+const byte rowPins[ROWS] = {5, 4, 3, 2};
+const byte colPins[COLS] = {6, 7, 8, 9};
 
-char buttons[ROWS][COLS] = {
+const char buttons[ROWS][COLS] = {
     {1, 2, 3, 4},
     {5, 6, 7, 8},
     {9, 10, 11, 12},
     {13, 14, 15, 16}};
 
-char *stringLookup[] = {
+const char *stringLookup[] = {
     "JOHN", "DAD", "IS", "AND",
     "ARE", "COOL", "FUNNY", "ODD",
     "EPIC", "MUM", "BUT", "SLOW",
@@ -28,11 +28,11 @@ void setup()
 
 void loop()
 {
-    char result = myAwesomePad.getKey();
+    const char result = myAwesomePad.getKey();
 
     if (result != 0)
     {
-        char *string = stringLookup[result - 1];
+        const char *string = stringLookup[result - 1];
         // Serial.println(result);
         Serial.println(string);
     }

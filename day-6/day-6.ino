@@ -9,7 +9,7 @@ void setup()
 
 void loop()
 {
-    int sensorValue = analogRead(sensorPin);
+    const int sensorValue = analogRead(sensorPin);
     Serial.println(sensorValue);
     delay(sensorValue);
     digitalWrite(onboardLED, HIGH);

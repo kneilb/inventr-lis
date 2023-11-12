@@ -17,7 +17,7 @@ void printBatteryPercentage()
     Serial.print(ticks);
     Serial.print("ms  charge level at ");
 
-    double percentFull = 100 * ((double)batteryLevel / (double)batteryCapacity);
+    const double percentFull = 100 * ((double)batteryLevel / (double)batteryCapacity);
     Serial.print(percentFull);
 
     Serial.println("%");
@@ -25,7 +25,7 @@ void printBatteryPercentage()
 
 void loop()
 {
-    int sensorValue = analogRead(sensorPin);
+    const int sensorValue = analogRead(sensorPin);
     batteryLevel += sensorValue;
     ticks += wait;
 

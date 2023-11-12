@@ -38,30 +38,30 @@ double getBatteryPercentage()
     return (((double)batteryLevel / (double)BATTERY_CAPACITY) * 100);
 }
 
-void ShowBatteryPercentage()
+void showBatteryPercentage()
 {
-    //  send battery results to both serial and LED outputs
-    //  calculate the charge percentage with a custom function...
-    const int PercentFull = getBatteryPercentage();
+    // send battery results to both serial and LED outputs
+    // calculate the charge percentage with a custom function...
+    const int percentFull = getBatteryPercentage();
 
-    // print the elasped time
+    // print the elapsed time
     Serial.print(ticks);
     Serial.print(" ms    charge at ");
     // print the percent charge
-    Serial.print(PercentFull);
+    Serial.print(percentFull);
     // print a percent character and line return...
     Serial.println("%");
 
     // Now let's light the LED with the appropriate color...
-    if (PercentFull > 75)
+    if (percentFull > 75)
     {
         rgbColour(125, 125, 125); // white
     }
-    else if (PercentFull > 50)
+    else if (percentFull > 50)
     {
         rgbColour(0, 125, 125); // blue-ish
     }
-    else if (PercentFull > 25)
+    else if (percentFull > 25)
     {
         rgbColour(125, 80, 0); // yellow-ish
     }
@@ -70,13 +70,13 @@ void ShowBatteryPercentage()
         rgbColour(125, 0, 0); // red
     }
 
-    // if (PercentFull > 0 && PercentFull <= 25) {
+    // if (percentFull > 0 && percentFull <= 25) {
     //   rgbColour(125, 0, 0);  // red
-    // } else if (PercentFull > 25 && PercentFull <= 50) {
+    // } else if (percentFull > 25 && percentFull <= 50) {
     //   rgbColour(125, 80, 0);  // yellow-ish
-    // } else if (PercentFull > 50 && PercentFull <= 75) {
+    // } else if (percentFull > 50 && percentFull <= 75) {
     //   rgbColour(0, 125, 125);  // blue-ish
-    // } else if (PercentFull > 75 && PercentFull < 100) {
+    // } else if (percentFull > 75 && percentFull < 100) {
     //   rgbColour(125, 125, 125);  // white
     // }
 }
@@ -101,7 +101,7 @@ void loop()
     }
     else
     {
-        ShowBatteryPercentage();
+        showBatteryPercentage();
     }
 
     delay(WAIT);
