@@ -74,6 +74,22 @@ void loop()
 
 bool validatePIN()
 {
-    //place holder (OF HELL)
+    Serial.println("put in yo pin");
+
+    for (int i = 0; i < PIN_LENGTH; i++) {
+        char button_character = BadgerButtons.waitForKey();
+        tone(BUZZER_PIN, 880, 100);
+
+        if (current_pin[i] != button_character) {
+            Serial.println();
+            Serial.print("yo, i fink ya messed up");
+            Serial.println(button_character);
+            return false;
+        }
+        Serial.print("*");
+    }
+
+    Serial.println();
+    Serial.println("Well done yo!");
     return true;
 }
