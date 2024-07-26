@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:uno",
     "port": "COM3",
-    "sketch": "day-14\\day-14.ino"
+    "sketch": "day-15\\day-15.ino"
 }
