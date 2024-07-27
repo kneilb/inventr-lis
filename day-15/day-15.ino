@@ -1,8 +1,17 @@
+#include <Key.h>
+#include <Keypad.h>
+
 #include <Arduino.h>
 #include <TM1637Display.h>
 
-const byte CLK_PIN = 6;
-const byte DIO_PIN = 5;
+const byte CLK_PIN = 13;
+const byte DIO_PIN = 12;
+
+const byte ROWS = 4;
+const byte COLS = 4;
+
+const byte rowPins[ROWS] = {5, 4, 3, 2};
+const byte colPins[COLS] = {6, 7, 8, 9};
 
 /*
  * A 7-segment display is shaped like an "8" and has 7 segments (A through G) that can be
@@ -19,59 +28,43 @@ const byte DIO_PIN = 5;
  * The most significant bit controls the colon on this display, but only for the middle 2 digits.
  */
 
-const byte ALL_ON[] = {
-    0b01111111,
-    0b11111111,
-    0b11111111,
-    0b01111111
+const byte ZERO[] =
+{
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00111111
 };
 
-const byte DONE[] = {
-    0b01011110,
-    0b00111111,
-    0b00110111,
-    0b01111001
+const char buttons[ROWS][COLS] =
+{
+    {1, 2, 3, 43},
+    {4, 5, 6, 44},
+    {7, 8, 9, 45},
+    {42, 41, 47, 46}
 };
 
 TM1637Display display = TM1637Display(CLK_PIN, DIO_PIN);
+Keypad myAwesomePad = Keypad(makeKeymap(buttons), rowPins, colPins, ROWS, COLS);
 
-void setup() {
+void setup()
+{
     display.setBrightness(7);
 }
 
-void loop() {
-    display.clear();
-    delay(1000);
+void loop()
+{
+    const char numberPressed = myAwesomePad.waitForKey();
 
-    display.setSegments(ALL_ON);
-    delay(1000);
-
-    display.clear();
-    delay(1000);
-
-    for (int i = 0; i < 4; i++) {
-        display.showNumberDecEx(1200, 0b01000000);
-        delay(500);
+    // could have done if (numberPressed >= 42) :)
+    if (numberPressed == 43 || numberPressed == 44 || numberPressed == 45 || numberPressed == 46 || numberPressed == 47 || numberPressed == 42) {
         display.clear();
-        delay(500);
     }
-
-    // Show counter including negative sign for negative numbers
-    // NOTE: negative numbers cannot be less than -999 since the negative sign
-    //       uses the left most digit of the display.
-    for (int i = -100; i <= 100; i++) {
-        display.showNumberDec(i);
-        delay(50);
+    else if (numberPressed == 41)
+    {
+        display.setSegments(ZERO);
     }
-    delay(1000);
-
-    // Clear the display (all segments off)
-    display.clear();
-    delay(1000);
-
-    // Display the message "dOnE"
-    display.setSegments(DONE);
-
-    delay(10000);  // Delay 10 seconds and then repeat our demo.
+    else {
+        display.showNumberDecEx(numberPressed);
+    }
 }
-
